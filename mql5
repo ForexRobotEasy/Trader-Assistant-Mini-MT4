@@ -1,0 +1,63 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                           Trader Assistant Mini MT4|
+//|                                   Developer's site: forexroboteasy.com|
+//|                                                Developer: Forex Robot Easy Team|
+//+------------------------------------------------------------------+
+
+// Risk to Reward Ratio (R:R) Panel function
+void CalculateRR(double potentialLoss, double potentialProfit)
+{
+    double riskRewardRatio = potentialProfit / potentialLoss;
+    // Display the calculated ratio
+    Print('Risk to Reward Ratio: ', riskRewardRatio);
+}
+
+// Trade Panel function
+void DisplayTradePanel(double profit, double loss)
+{
+    double pipsProfit = profit * 10; // Assuming 1 pip = 0.1 point
+    double pipsLoss = loss * 10;     // Assuming 1 pip = 0.1 point
+    double percentProfit = (profit / (profit + loss)) * 100;
+    double percentLoss = (loss / (profit + loss)) * 100;
+
+    // Display the profit and loss in pips and percentages
+    Print('Pips Profit: ', pipsProfit);
+    Print('Pips Loss: ', pipsLoss);
+    Print('Percent Profit: ', percentProfit, '%');
+    Print('Percent Loss: ', percentLoss, '%');
+}
+
+//+------------------------------------------------------------------+
+//|                     Expert initialization function                |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Call the Risk to Reward Ratio (R:R) Panel function
+    CalculateRR(100, 200);  // Example values for potential losses and potential profits
+
+    // Call the Trade Panel function
+    DisplayTradePanel(50, 25); // Example values for profit and loss
+
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//|                      Expert deinitialization function             |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    // Cleanup code if necessary
+}
+
+//+------------------------------------------------------------------+
+//|                       Expert tick function                        |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Implement real-time trade data retrieval and call DisplayTradePanel function with received data
+    double currentProfit = 75;  // Example value for current profit
+    double currentLoss = 30;    // Example value for current loss
+
+    DisplayTradePanel(currentProfit, currentLoss);
+}
